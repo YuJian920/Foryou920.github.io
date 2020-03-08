@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="遇见的小站" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    零基础教你用WordPress搭建个人网站 |  Foryou920
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/yujianlogo.png" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-零基础教你用WordPress搭建个人网站" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  零基础教你用WordPress搭建个人网站
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/08/%E9%9B%B6%E5%9F%BA%E7%A1%80%E6%95%99%E4%BD%A0%E7%94%A8WordPress%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/" class="article-date">
+  <time datetime="2020-03-08T15:30:39.326Z" itemprop="datePublished">2020-03-08</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">3分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p><img src="/images/welcome-to-wp.png" alt=""></p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><blockquote>
+<p>网上关于使用WordPress搭建个人网站的教程有很多，我的水平也没有那些真正的dalao高，写这一篇主要是为了帮还不会建站的朋友们入门门槛低一些<br>顺带复习一下语文<br>你可以问我问题，但没准你知道的比我还多</p>
+</blockquote>
+<h2 id="正文部分"><a href="#正文部分" class="headerlink" title="正文部分"></a>正文部分</h2><p>###第一步，注册一个域名<br>国内比较出名的有万网，腾讯云。国外比较出名的有GoDaddy，选好合适的然后付钱就可以了( • ̀ω•́ )✧</p>
+<h3 id="第二步，购买一台云服务器"><a href="#第二步，购买一台云服务器" class="headerlink" title="第二步，购买一台云服务器"></a>第二步，购买一台云服务器</h3><h5 id="这一步要注意，国内主机用于网站搭建需要备案"><a href="#这一步要注意，国内主机用于网站搭建需要备案" class="headerlink" title="这一步要注意，国内主机用于网站搭建需要备案"></a>这一步要注意，国内主机用于网站搭建需要备案</h5><p>国内可以选择阿里云，腾讯云之类的比较出名的服务商<br>国外的涉及部分原因不予说明，请自行百度(￣ ￣)／</p>
+<p>腾讯云有学生优惠套餐，最低只需要10元一个月，但只有国内主机可选<br><img src="http://upload-images.jianshu.io/upload_images/5576209-6188df2861401739.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p>阿里云学生认证之后也有学生优惠套餐，9.5一个月，年费还送.xin域名，只有国内主机可选</p>
+<a id="more"></a>
+<p><img src="http://upload-images.jianshu.io/upload_images/5576209-a351ea64e3757397.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="第三步，安装必要环境和WordPress"><a href="#第三步，安装必要环境和WordPress" class="headerlink" title="第三步，安装必要环境和WordPress"></a>第三步，安装必要环境和WordPress</h3><h6 id="以下步骤全部都在CentOS下完成-并在CentOS6-8下测试通过"><a href="#以下步骤全部都在CentOS下完成-并在CentOS6-8下测试通过" class="headerlink" title="* 以下步骤全部都在CentOS下完成,并在CentOS6.8下测试通过"></a>* 以下步骤全部都在CentOS下完成,并在CentOS6.8下测试通过</h6><h4 id="搭建LAMP环境"><a href="#搭建LAMP环境" class="headerlink" title="搭建LAMP环境"></a>搭建LAMP环境</h4><p>LAMP是Linux，Apache，MySQL，PHP的缩写，是WordPress博客系统的基础运行环境</p>
+<h6 id="安装Apache"><a href="#安装Apache" class="headerlink" title="安装Apache"></a>安装Apache</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install httpd -y</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/5576209-b242a87b1646bb22.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h6 id="安装完后启动Apache服务"><a href="#安装完后启动Apache服务" class="headerlink" title="安装完后启动Apache服务"></a>安装完后启动Apache服务</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service httpd start</span><br></pre></td></tr></table></figure>
+<h6 id="将Apache设置为开机自启动"><a href="#将Apache设置为开机自启动" class="headerlink" title="将Apache设置为开机自启动"></a>将Apache设置为开机自启动</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig httpd on</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mysql-server -y</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/5576209-34bb2a7b7a0ea085.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h6 id="安装完成后启动MySQL服务"><a href="#安装完成后启动MySQL服务" class="headerlink" title="安装完成后启动MySQL服务"></a>安装完成后启动MySQL服务</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure>
+<h6 id="将MySQL设置为开机自启动"><a href="#将MySQL设置为开机自启动" class="headerlink" title="将MySQL设置为开机自启动"></a>将MySQL设置为开机自启动</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig mysqld on</span><br></pre></td></tr></table></figure>
+<h6 id="设置-MySQL-账户-root-密码"><a href="#设置-MySQL-账户-root-密码" class="headerlink" title="设置 MySQL 账户 root 密码"></a>设置 MySQL 账户 root 密码</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/mysqladmin -u root password '输入密码'</span><br></pre></td></tr></table></figure>
+<h6 id="进入MySQL"><a href="#进入MySQL" class="headerlink" title="进入MySQL"></a>进入MySQL</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot --password='你设置的密码'</span><br></pre></td></tr></table></figure>
+<h6 id="为-WordPress-创建一个名为WordPress的数据库"><a href="#为-WordPress-创建一个名为WordPress的数据库" class="headerlink" title="为 WordPress 创建一个名为WordPress的数据库"></a>为 WordPress 创建一个名为WordPress的数据库</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE wordpress;</span><br></pre></td></tr></table></figure>
+<h6 id="成功后退出"><a href="#成功后退出" class="headerlink" title="成功后退出"></a>成功后退出</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装PHP和PHPMySQL-分两行输入"><a href="#安装PHP和PHPMySQL-分两行输入" class="headerlink" title="安装PHP和PHPMySQL(分两行输入)"></a>安装PHP和PHPMySQL(分两行输入)</h4><p>*由于部分服务商的CentOS6可能自带php-mysql，所以可能会提示已经安装.不用理会就好了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install php -y</span><br><span class="line">yum install php-mysql -y</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/5576209-604e7636e8d282d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h6 id="在-var-www-html目录下新建一个hellowrold-php文件来检查Apache是否支持php，输入"><a href="#在-var-www-html目录下新建一个hellowrold-php文件来检查Apache是否支持php，输入" class="headerlink" title="在/var/www/html目录下新建一个hellowrold.php文件来检查Apache是否支持php，输入"></a>在/var/www/html目录下新建一个hellowrold.php文件来检查Apache是否支持php，输入</h6><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> phpinfo(); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="重启Apache服务"><a href="#重启Apache服务" class="headerlink" title="重启Apache服务"></a>重启Apache服务</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service httpd restart</span><br></pre></td></tr></table></figure>
+<h6 id="浏览器输入"><a href="#浏览器输入" class="headerlink" title="浏览器输入"></a>浏览器输入</h6><p>http://外网IP/hellowrold.php</p>
+<h6 id="应该就可以看到刚刚新建的PHP页面了"><a href="#应该就可以看到刚刚新建的PHP页面了" class="headerlink" title="应该就可以看到刚刚新建的PHP页面了"></a>应该就可以看到刚刚新建的PHP页面了</h6><p><img src="http://upload-images.jianshu.io/upload_images/5576209-376fb403b1f96db6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h4 id="安装WordPress博客系统"><a href="#安装WordPress博客系统" class="headerlink" title="安装WordPress博客系统"></a>安装WordPress博客系统</h4><h6 id="下载最新版WordPress中文版"><a href="#下载最新版WordPress中文版" class="headerlink" title="下载最新版WordPress中文版"></a>下载最新版WordPress中文版</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://cn.wordpress.org/wordpress-4.9.1-zh_CN.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h6 id="解压WordPress"><a href="#解压WordPress" class="headerlink" title="解压WordPress"></a>解压WordPress</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf wordpress-4.9.1-zh_CN.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h6 id="移动WordPress"><a href="#移动WordPress" class="headerlink" title="移动WordPress"></a>移动WordPress</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv wordpress /var/www/html/</span><br></pre></td></tr></table></figure>
+
+<p>*如果在后面的五分钟配置环节提示需要手动写入wp-config.php文件，则输入以下指令更改权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -hR www-data /var/www/html/wordpress</span><br></pre></td></tr></table></figure>
+<p>如果还是不行，需要手动修改wp-config-sample.php</p>
+<h6 id="接着浏览器输入"><a href="#接着浏览器输入" class="headerlink" title="接着浏览器输入"></a>接着浏览器输入</h6><p>http://外网IP/wordpress</p>
+<h6 id="应该就能看到WordPress五分钟配置页面了"><a href="#应该就能看到WordPress五分钟配置页面了" class="headerlink" title="应该就能看到WordPress五分钟配置页面了"></a>应该就能看到WordPress五分钟配置页面了</h6><p><img src="http://upload-images.jianshu.io/upload_images/5576209-5623924da3b55d8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="第四步，绑定域名解析"><a href="#第四步，绑定域名解析" class="headerlink" title="第四步，绑定域名解析"></a>第四步，绑定域名解析</h3><p>域名解析这一步比较简单，基本上跟着步骤就可以啦<br>腾讯云域名解析示例<br><img src="http://upload-images.jianshu.io/upload_images/5576209-2b9da45ee22b7f49.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h5 id="主机名"><a href="#主机名" class="headerlink" title="主机名"></a>主机名</h5><p>www 是指解析之后域名为www.域名这样的形式,例如<a href="http://www.Foryou092.com" target="_blank" rel="noopener">www.Foryou092.com</a><br>@ 是指解析之后域名直接显示为 域名这样的形式，例如Foryou.com<br>*是将所有的次级域名均指向同一IP地址</p>
+<h5 id="记录类型"><a href="#记录类型" class="headerlink" title="记录类型"></a>记录类型</h5><p>A记录  用来指定域名的IPv4地址，如需要指向一个IP地址，则需要增加A记录<br>CNAME记录  如果将域名指向一个域名，实现与被指向域名相同的访问效果，则需要增加CNAME记录</p>
+<h5 id="记录值"><a href="#记录值" class="headerlink" title="记录值"></a>记录值</h5><p>填你的服务器的IPv4地址</p>
+<h4 id="TTL"><a href="#TTL" class="headerlink" title="TTL"></a>TTL</h4><p>因为DNS是有缓存的，所以TTL就是表示DNS记录在DNS服务器上的缓存时间<br>一般保持默认就好啦</p>
+<p>*尝试Ping你的域名，看看域名指向是否正确，DNS解析需要时间，添加完域名时间后需要等待一段时间</p>
+<h3 id="接下来就是花费时间把自己的网站建设的美观一点啦ヾ-。￣□￣-ツ"><a href="#接下来就是花费时间把自己的网站建设的美观一点啦ヾ-。￣□￣-ツ" class="headerlink" title="接下来就是花费时间把自己的网站建设的美观一点啦ヾ(。￣□￣)ツ"></a>接下来就是花费时间把自己的网站建设的美观一点啦ヾ(。￣□￣)ツ</h3><h3 id="一些WordPress主题推荐"><a href="#一些WordPress主题推荐" class="headerlink" title="一些WordPress主题推荐"></a>一些WordPress主题推荐</h3><p>我用的MD主题MDx：<a href="https://flyhigher.top/develop/788.html" target="_blank" rel="noopener">传送门</a></p>
+<h6 id="最后，感谢Axton"><a href="#最后，感谢Axton" class="headerlink" title="最后，感谢Axton"></a>最后，感谢Axton</h6><h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3><p>*以上内容大部分来自互联网ㄟ(▔ ,▔)ㄏ<br>*不来自的那就是我乱说的ㄟ(▔ ,▔)ㄏ</p>
+<p>青梅枯萎，竹马老去，从此我爱的人都像你<br>晚安</p>
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版权声明： </strong s>
+              本博客所有文章除特别声明外，均采用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 许可协议。转载请注明出处！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/08/%E9%9B%B6%E5%9F%BA%E7%A1%80%E6%95%99%E4%BD%A0%E7%94%A8WordPress%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/03/08/Yan%20Ruyu_Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Yan Ruyu_Vue学习笔记</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        YuJian
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/yujian0.png" alt="Foryou920"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['此生不复遇见你','',''],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+    
+  </div>
+</body>
+
+</html>

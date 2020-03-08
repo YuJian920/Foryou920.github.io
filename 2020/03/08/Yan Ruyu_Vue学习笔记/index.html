@@ -120,12 +120,11 @@
 <p>任何v-开头的Vue指令，后面接的都是JS的表达式。也就是说可以在后面接上加减乘除等JS语句。</p>
 </blockquote>
 <p>缓存功能在计算的成员值不变的情况下将不会进行第二次计算，节省资源。</p>
+<a id="more"></a>
 <h5 id="方法methods："><a href="#方法methods：" class="headerlink" title="方法methods："></a>方法methods：</h5><p>也可以直接通过属性名使用（注意方法独有的括号），但是它没有计算属性的缓存功能，在计算成员值不变的情况下每次都会重新计算一次，在网页元素比较多的情况下可能会有比较明显的资源浪费。</p>
 <h5 id="监听器watch："><a href="#监听器watch：" class="headerlink" title="监听器watch："></a>监听器watch：</h5><p>可以监听指定的方法，当监听的方法发生变化时会执行指定的操作，保留了计算属性的缓存功能。</p>
 <p>当以上三种方法同是适用的候，优先推荐计算属性 <code>computed</code>，既简洁，也保留了性能。</p>
 <h4 id="计算属性的getter和setter"><a href="#计算属性的getter和setter" class="headerlink" title="计算属性的getter和setter"></a>计算属性的getter和setter</h4><p>计算属性你可以使用 <code>Get</code>方法，通过其他值算出一个新值，也可以使用 <code>Set</code>方法，通过设置一个值改变相关联的值，从而使用计算属性的特性引起第二次计算。</p>
-<a id="more"></a>
-
 <h4 id="Vue中的样式绑定"><a href="#Vue中的样式绑定" class="headerlink" title="Vue中的样式绑定"></a>Vue中的样式绑定</h4><p>可以使用 <code>isActivated</code>来控制样式名字的显示和隐藏，在 <code>data</code> 或 <code>methods</code> 中设置 <code>isActivated</code> 为true就会绑定上CSS的样式。也可以使用数组来控制样式名字，设置数组的第一个值为空，标签就没有绑定CSS样式，设置数组第一个值为CSS样式名字则会绑定，还可以使用<code>V-bind:style=&quot;CSS样式名字&quot;</code>的方式来进行绑定，这样CSS样式名字就是一个Vue的 <code>data</code> 值，可以在Vue的<code>data</code> 中控制它的属性，以此类推，这种方法后面也能接一个数组，（具体看2.3_Style binding.html）更多样化。</p>
 <h4 id="Vue的条件渲染"><a href="#Vue的条件渲染" class="headerlink" title="Vue的条件渲染"></a>Vue的条件渲染</h4><h5 id="v-if、v-else-if、v-else："><a href="#v-if、v-else-if、v-else：" class="headerlink" title="v-if、v-else-if、v-else："></a>v-if、v-else-if、v-else：</h5><p><code>v-if</code>是一个Vue的指令，它的值决定了它所在的这个DIV标签是否渲染显示，每次的隐藏和显示都相当于删除和增加一个DOM元素，它还能搭配 <code>v-else</code> 或 <code>v-else-if</code>一起组合使用（警告，<code>v-if</code> 和 <code>v-else</code>、<code>v-else-if</code>必须紧靠在一起使用！）。<br>由于Vue的特性，Vue在渲染网页的时候会尽量复用页面上已有的DOM，这可能会产生一些问题，为了解决这些问题就有<code>key</code>值这个概念，<code>key</code>值是独一无二的，Vue并不会复用key值不一样的DOM元素。</p>
 <h5 id="v-show："><a href="#v-show：" class="headerlink" title="v-show："></a>v-show：</h5><p><code>v-show</code> 与 <code>v-if</code>类似，但是它每次的隐藏和显示并非是在页面上删除和增加一个新的DOM，而是通过隐藏DOM标签，在相同的环境下，<code>v-show</code>所需要的性能相对要低于前者。</p>
@@ -257,6 +256,20 @@
 
   
   
+  <nav class="article-nav">
+    
+      <a href="/2020/03/08/%E9%9B%B6%E5%9F%BA%E7%A1%80%E6%95%99%E4%BD%A0%E7%94%A8WordPress%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            零基础教你用WordPress搭建个人网站
+          
+        </div>
+      </a>
+    
+    
+  </nav>
+
 
   
 
