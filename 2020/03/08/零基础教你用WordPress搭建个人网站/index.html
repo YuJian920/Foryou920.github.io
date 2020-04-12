@@ -103,19 +103,19 @@
 </blockquote>
 <h2 id="正文部分"><a href="#正文部分" class="headerlink" title="正文部分"></a>正文部分</h2><p>###第一步，注册一个域名<br>国内比较出名的有万网，腾讯云。国外比较出名的有GoDaddy，选好合适的然后付钱就可以了( • ̀ω•́ )✧</p>
 <h3 id="第二步，购买一台云服务器"><a href="#第二步，购买一台云服务器" class="headerlink" title="第二步，购买一台云服务器"></a>第二步，购买一台云服务器</h3><h5 id="这一步要注意，国内主机用于网站搭建需要备案"><a href="#这一步要注意，国内主机用于网站搭建需要备案" class="headerlink" title="这一步要注意，国内主机用于网站搭建需要备案"></a>这一步要注意，国内主机用于网站搭建需要备案</h5><p>国内可以选择阿里云，腾讯云之类的比较出名的服务商<br>国外的涉及部分原因不予说明，请自行百度(￣ ￣)／</p>
-<p>腾讯云有学生优惠套餐，最低只需要10元一个月，但只有国内主机可选<br><img src="http://upload-images.jianshu.io/upload_images/5576209-6188df2861401739.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p>腾讯云有学生优惠套餐，最低只需要10元一个月，但只有国内主机可选<br><img src="/images/Tenxunyun.png" alt=""></p>
 <p>阿里云学生认证之后也有学生优惠套餐，9.5一个月，年费还送.xin域名，只有国内主机可选</p>
 <a id="more"></a>
-<p><img src="http://upload-images.jianshu.io/upload_images/5576209-a351ea64e3757397.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+
 <h3 id="第三步，安装必要环境和WordPress"><a href="#第三步，安装必要环境和WordPress" class="headerlink" title="第三步，安装必要环境和WordPress"></a>第三步，安装必要环境和WordPress</h3><h6 id="以下步骤全部都在CentOS下完成-并在CentOS6-8下测试通过"><a href="#以下步骤全部都在CentOS下完成-并在CentOS6-8下测试通过" class="headerlink" title="* 以下步骤全部都在CentOS下完成,并在CentOS6.8下测试通过"></a>* 以下步骤全部都在CentOS下完成,并在CentOS6.8下测试通过</h6><h4 id="搭建LAMP环境"><a href="#搭建LAMP环境" class="headerlink" title="搭建LAMP环境"></a>搭建LAMP环境</h4><p>LAMP是Linux，Apache，MySQL，PHP的缩写，是WordPress博客系统的基础运行环境</p>
 <h6 id="安装Apache"><a href="#安装Apache" class="headerlink" title="安装Apache"></a>安装Apache</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install httpd -y</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/5576209-b242a87b1646bb22.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="/images/1.png" alt=""></p>
 <h6 id="安装完后启动Apache服务"><a href="#安装完后启动Apache服务" class="headerlink" title="安装完后启动Apache服务"></a>安装完后启动Apache服务</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service httpd start</span><br></pre></td></tr></table></figure>
 <h6 id="将Apache设置为开机自启动"><a href="#将Apache设置为开机自启动" class="headerlink" title="将Apache设置为开机自启动"></a>将Apache设置为开机自启动</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig httpd on</span><br></pre></td></tr></table></figure>
 
 
 <h4 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mysql-server -y</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/5576209-34bb2a7b7a0ea085.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="/images/2.png" alt=""></p>
 <h6 id="安装完成后启动MySQL服务"><a href="#安装完成后启动MySQL服务" class="headerlink" title="安装完成后启动MySQL服务"></a>安装完成后启动MySQL服务</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure>
 <h6 id="将MySQL设置为开机自启动"><a href="#将MySQL设置为开机自启动" class="headerlink" title="将MySQL设置为开机自启动"></a>将MySQL设置为开机自启动</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig mysqld on</span><br></pre></td></tr></table></figure>
 <h6 id="设置-MySQL-账户-root-密码"><a href="#设置-MySQL-账户-root-密码" class="headerlink" title="设置 MySQL 账户 root 密码"></a>设置 MySQL 账户 root 密码</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/mysqladmin -u root password '输入密码'</span><br></pre></td></tr></table></figure>
@@ -125,11 +125,12 @@
 
 <h4 id="安装PHP和PHPMySQL-分两行输入"><a href="#安装PHP和PHPMySQL-分两行输入" class="headerlink" title="安装PHP和PHPMySQL(分两行输入)"></a>安装PHP和PHPMySQL(分两行输入)</h4><p>*由于部分服务商的CentOS6可能自带php-mysql，所以可能会提示已经安装.不用理会就好了</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install php -y</span><br><span class="line">yum install php-mysql -y</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/5576209-604e7636e8d282d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+
+
 <h6 id="在-var-www-html目录下新建一个hellowrold-php文件来检查Apache是否支持php，输入"><a href="#在-var-www-html目录下新建一个hellowrold-php文件来检查Apache是否支持php，输入" class="headerlink" title="在/var/www/html目录下新建一个hellowrold.php文件来检查Apache是否支持php，输入"></a>在/var/www/html目录下新建一个hellowrold.php文件来检查Apache是否支持php，输入</h6><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> phpinfo(); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <h6 id="重启Apache服务"><a href="#重启Apache服务" class="headerlink" title="重启Apache服务"></a>重启Apache服务</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service httpd restart</span><br></pre></td></tr></table></figure>
 <h6 id="浏览器输入"><a href="#浏览器输入" class="headerlink" title="浏览器输入"></a>浏览器输入</h6><p>http://外网IP/hellowrold.php</p>
-<h6 id="应该就可以看到刚刚新建的PHP页面了"><a href="#应该就可以看到刚刚新建的PHP页面了" class="headerlink" title="应该就可以看到刚刚新建的PHP页面了"></a>应该就可以看到刚刚新建的PHP页面了</h6><p><img src="http://upload-images.jianshu.io/upload_images/5576209-376fb403b1f96db6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h6 id="应该就可以看到刚刚新建的PHP页面了"><a href="#应该就可以看到刚刚新建的PHP页面了" class="headerlink" title="应该就可以看到刚刚新建的PHP页面了"></a>应该就可以看到刚刚新建的PHP页面了</h6><p><img src="/images/4.png" alt=""></p>
 <h4 id="安装WordPress博客系统"><a href="#安装WordPress博客系统" class="headerlink" title="安装WordPress博客系统"></a>安装WordPress博客系统</h4><h6 id="下载最新版WordPress中文版"><a href="#下载最新版WordPress中文版" class="headerlink" title="下载最新版WordPress中文版"></a>下载最新版WordPress中文版</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://cn.wordpress.org/wordpress-4.9.1-zh_CN.tar.gz</span><br></pre></td></tr></table></figure>
 
 <h6 id="解压WordPress"><a href="#解压WordPress" class="headerlink" title="解压WordPress"></a>解压WordPress</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf wordpress-4.9.1-zh_CN.tar.gz</span><br></pre></td></tr></table></figure>
@@ -140,8 +141,8 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -hR www-data /var/www/html/wordpress</span><br></pre></td></tr></table></figure>
 <p>如果还是不行，需要手动修改wp-config-sample.php</p>
 <h6 id="接着浏览器输入"><a href="#接着浏览器输入" class="headerlink" title="接着浏览器输入"></a>接着浏览器输入</h6><p>http://外网IP/wordpress</p>
-<h6 id="应该就能看到WordPress五分钟配置页面了"><a href="#应该就能看到WordPress五分钟配置页面了" class="headerlink" title="应该就能看到WordPress五分钟配置页面了"></a>应该就能看到WordPress五分钟配置页面了</h6><p><img src="http://upload-images.jianshu.io/upload_images/5576209-5623924da3b55d8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h3 id="第四步，绑定域名解析"><a href="#第四步，绑定域名解析" class="headerlink" title="第四步，绑定域名解析"></a>第四步，绑定域名解析</h3><p>域名解析这一步比较简单，基本上跟着步骤就可以啦<br>腾讯云域名解析示例<br><img src="http://upload-images.jianshu.io/upload_images/5576209-2b9da45ee22b7f49.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h6 id="应该就能看到WordPress五分钟配置页面了"><a href="#应该就能看到WordPress五分钟配置页面了" class="headerlink" title="应该就能看到WordPress五分钟配置页面了"></a>应该就能看到WordPress五分钟配置页面了</h6><p><img src="/images/5.png" alt=""></p>
+<h3 id="第四步，绑定域名解析"><a href="#第四步，绑定域名解析" class="headerlink" title="第四步，绑定域名解析"></a>第四步，绑定域名解析</h3><p>域名解析这一步比较简单，基本上跟着步骤就可以啦<br>腾讯云域名解析示例<br><img src="/images/6.png" alt=""></p>
 <h5 id="主机名"><a href="#主机名" class="headerlink" title="主机名"></a>主机名</h5><p>www 是指解析之后域名为www.域名这样的形式,例如<a href="http://www.Foryou092.com" target="_blank" rel="noopener">www.Foryou092.com</a><br>@ 是指解析之后域名直接显示为 域名这样的形式，例如Foryou.com<br>*是将所有的次级域名均指向同一IP地址</p>
 <h5 id="记录类型"><a href="#记录类型" class="headerlink" title="记录类型"></a>记录类型</h5><p>A记录  用来指定域名的IPv4地址，如需要指向一个IP地址，则需要增加A记录<br>CNAME记录  如果将域名指向一个域名，实现与被指向域名相同的访问效果，则需要增加CNAME记录</p>
 <h5 id="记录值"><a href="#记录值" class="headerlink" title="记录值"></a>记录值</h5><p>填你的服务器的IPv4地址</p>
