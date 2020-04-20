@@ -61,7 +61,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">683字</span>
+            <span class="post-count">681字</span>
         </span>
     </span>
 
@@ -112,7 +112,7 @@
 <p> 这样一来就实现了Mock.js对GET请求参数的模拟，光是这样还不行，需要对mock模拟的数据进行拆分，根据页数的不同返回的内容也不同，这里用到了JS的slice方法对数据拆成了6份</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> Page = <span class="number">1</span>; Page &lt;= <span class="number">6</span>; Page++) &#123;</span><br><span class="line">  <span class="keyword">let</span> params = &#123;</span><br><span class="line">    <span class="string">'data'</span>: []</span><br><span class="line">  &#125;</span><br><span class="line">  Mock.mock(<span class="string">`<span class="subst">$&#123;baseURL&#125;</span>/list?Page=<span class="subst">$&#123;Page&#125;</span>`</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    params.data = listJson.slice((Page - <span class="number">1</span>) * <span class="number">6</span>, Page * <span class="number">6</span>)</span><br><span class="line">    <span class="keyword">return</span> params</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>获取到了返回的分页数据，下一步就是要把数据给渲染出来，这里直接使用<code>push(params)</code>添加数据是不行的，因为params是一个数组，这里需要用的ES6的解构赋值语法(<code>...</code>)</p>
+<p>获取到了返回的分页数据，下一步就是要把数据给渲染出来，这里直接使用<code>push(params)</code>添加数据是不行的，因为params是一个数组，这里需要用到JS的展开运算(<code>...</code>)</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.MusicListJson.push(...params);</span><br></pre></td></tr></table></figure>
 
 <p>这样就完成了请求数据的添加操作</p>
