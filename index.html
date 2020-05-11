@@ -66,6 +66,79 @@
     
     
     
+    <article id="post-通过Vue源代码解析$on、$emit实现原理" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/05/11/%E9%80%9A%E8%BF%87Vue%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90$on%E3%80%81$emit%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"
+    >通过Vue源代码解析$on、$emit实现原理</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/11/%E9%80%9A%E8%BF%87Vue%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90$on%E3%80%81$emit%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2020-05-11T08:19:37.946Z" itemprop="datePublished">2020-05-11</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p><img src="/images/Vue_on&emit.png" alt="More OOXX With Vue"></p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><strong>阅读Vue的源码对深入学习Vue框架是非常有必要的，只知道它表面的用法，而不知道它内部的原理那就说不上是真正熟悉掌握了这一门框架，常常出了问题一头雾水</strong></p>
+<p><strong>Vue的$emit、$on和Node.js的EventEmitter的使用方法非常类似。</strong></p>
+<h2 id="正式开始"><a href="#正式开始" class="headerlink" title="正式开始"></a>正式开始</h2><h4 id="on绑定事件"><a href="#on绑定事件" class="headerlink" title="$on绑定事件"></a>$on绑定事件</h4><blockquote>
+<p>Vue中的$on是一种将函数与事件绑定的方法。</p>
+</blockquote>
+<p>通过Vue的源代码可以看到，$on调用时需要两个参数，第一个是字符串或数组类型作为事件的名称，第二个是触发事件执行的回调函数。$on第一步会对第一个参数做一个是否为数组的判断，这里可以看出$on允许为多个事件绑定同一个回调函数。</p>
+      
+      <a class="article-more-link" href="/2020/05/11/%E9%80%9A%E8%BF%87Vue%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90$on%E3%80%81$emit%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+
+</article>
+    
     <article id="post-无插件实现JS下拉加载" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 

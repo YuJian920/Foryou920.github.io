@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    About Me |  Foryou920
+    通过Vue源代码解析$on、$emit实现原理 |  Foryou920
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -33,7 +33,7 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-About Me" class="article article-type-post" itemscope
+  <article id="post-通过Vue源代码解析$on、$emit实现原理" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -41,7 +41,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  About Me
+  通过Vue源代码解析$on、$emit实现原理
 </h1>
   
 
@@ -50,8 +50,8 @@
 
     
     <div class="article-meta">
-      <a href="/2020/04/15/About%20Me/" class="article-date">
-  <time datetime="2020-04-15T12:27:58.858Z" itemprop="datePublished">2020-04-15</time>
+      <a href="/2020/05/11/%E9%80%9A%E8%BF%87Vue%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90$on%E3%80%81$emit%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2020-05-11T08:19:37.946Z" itemprop="datePublished">2020-05-11</time>
 </a>
       
       
@@ -61,7 +61,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">274字</span>
+            <span class="post-count">753字</span>
         </span>
     </span>
 
@@ -70,7 +70,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1分钟</span>
+            <span class="post-count">2分钟</span>
         </span>
     </span>
 </div>
@@ -97,25 +97,34 @@
       
 
       
-      <h4 id="如果天空总是黑暗的，那就摸黑生存；"><a href="#如果天空总是黑暗的，那就摸黑生存；" class="headerlink" title="如果天空总是黑暗的，那就摸黑生存；"></a>如果天空总是黑暗的，那就摸黑生存；</h4><h4 id="如果发出声音是危险的，那就保持沉默；"><a href="#如果发出声音是危险的，那就保持沉默；" class="headerlink" title="如果发出声音是危险的，那就保持沉默；"></a>如果发出声音是危险的，那就保持沉默；</h4><h4 id="如果自觉无力发光，那就蜷伏于墙角。"><a href="#如果自觉无力发光，那就蜷伏于墙角。" class="headerlink" title="如果自觉无力发光，那就蜷伏于墙角。"></a>如果自觉无力发光，那就蜷伏于墙角。</h4><h4 id="但不要习惯了黑暗就为黑暗辩护；"><a href="#但不要习惯了黑暗就为黑暗辩护；" class="headerlink" title="但不要习惯了黑暗就为黑暗辩护；"></a>但不要习惯了黑暗就为黑暗辩护；</h4><h4 id="也不要为自己的苟且而得意；"><a href="#也不要为自己的苟且而得意；" class="headerlink" title="也不要为自己的苟且而得意；"></a>也不要为自己的苟且而得意；</h4><h4 id="不要嘲讽那些比自己更勇敢的人们。"><a href="#不要嘲讽那些比自己更勇敢的人们。" class="headerlink" title="不要嘲讽那些比自己更勇敢的人们。"></a>不要嘲讽那些比自己更勇敢的人们。</h4><h4 id="我们可以卑微如尘土，但不可扭曲如蛆虫。"><a href="#我们可以卑微如尘土，但不可扭曲如蛆虫。" class="headerlink" title="我们可以卑微如尘土，但不可扭曲如蛆虫。"></a>我们可以卑微如尘土，但不可扭曲如蛆虫。</h4><a id="more"></a>
+      <p><img src="/images/Vue_on&emit.png" alt="More OOXX With Vue"></p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><strong>阅读Vue的源码对深入学习Vue框架是非常有必要的，只知道它表面的用法，而不知道它内部的原理那就说不上是真正熟悉掌握了这一门框架，常常出了问题一头雾水</strong></p>
+<p><strong>Vue的$emit、$on和Node.js的EventEmitter的使用方法非常类似。</strong></p>
+<h2 id="正式开始"><a href="#正式开始" class="headerlink" title="正式开始"></a>正式开始</h2><h4 id="on绑定事件"><a href="#on绑定事件" class="headerlink" title="$on绑定事件"></a>$on绑定事件</h4><blockquote>
+<p>Vue中的$on是一种将函数与事件绑定的方法。</p>
+</blockquote>
+<p>通过Vue的源代码可以看到，$on调用时需要两个参数，第一个是字符串或数组类型作为事件的名称，第二个是触发事件执行的回调函数。$on第一步会对第一个参数做一个是否为数组的判断，这里可以看出$on允许为多个事件绑定同一个回调函数。</p>
+<a id="more"></a>
 
-</br>
-</br>
-</br>
-</br>
-</br>
-
-<p>会敲点代码，会点C，C#，JaveScript，Python，PHP</p>
-<p>最喜欢的Text Editor是VSCode</p>
-<p>会剪视频加特效用着Adobe全家桶</p>
-<p>喜欢玩游戏，经过鉴定有严重帕金森综合征</p>
-<p>如果你也喜欢玩游戏欢迎加我为好友增加游戏难度</p>
-<p>喜欢电脑，对一切新兴的事物感兴趣</p>
-<p>最擅长Linux的开关机，最喜欢用rm -rf * </p>
-<p>偶尔会抬头45°看天空，然后因为看不到路放下来</p>
-<p>喜欢看动漫，曾经是半个死宅</p>
-<p>接下来的学习方向会是Java，Unity，C++，服务器运维等等</p>
-<p><del>虽然人很懒，但偶尔也会往前爬几步XD</del></p>
+<p>如果参数为数组，那么它会使用for遍历这个数组，并进行递归。<br>如果参数为字符串，那么它会在已有的事件(_events)中寻找是否已经存在相同的事件，如果没有会创建并初始化为空数组同时将传递的第二个参数也就是事件被触发时需要执行的回调函数添加进去。</p>
+<p><img src="/images/$on%E6%96%B9%E6%B3%95.png" alt="$on方法"></p>
+<blockquote>
+<p>总结：$on方法允许为多个事件绑定同一个回调函数，还在里面使用了递归<del>自己日自己</del></p>
+</blockquote>
+<h4 id="emit-触发事件"><a href="#emit-触发事件" class="headerlink" title="$emit 触发事件"></a>$emit 触发事件</h4><blockquote>
+<p>Vue中的$emit是一种触发事件的方法。</p>
+</blockquote>
+<p>它接受的第一个参数是一个字符串类型，这个字符串参数也就是需要触发的事件名称，第二个参数是触发事件时需要传递的数据。</p>
+<p>第一步$emit会将传递的事件名称转换成小写，并进行一系列的检查判断是否符合语法标准，然后它会在事件列表(_events)中寻找事件对应的回调函数，也就是在$on中传递并添加的回调函数，这里如果没有找到会直接返回，找到了会先进行一次判断，判断回调函数是否大于1，如果大于就把它转换成一个数组。</p>
+<p>这时候第一个参数事件名已经不再需要了，$emit会将其舍弃，并把剩下的数据转换成数组。传递给一个带有try&amp;catch的invokeWithErrorHandling()方法，并在其中使用apply()或call()来调用事件回调函数。</p>
+<p><img src="/images/%E8%B0%83%E7%94%A8invokeWithErrorHandling%E6%96%B9%E6%B3%95.png" alt="调用invokeWithErrorHandling方法"></p>
+<p><strong>invokeWithErrorHandling()方法源代码</strong></p>
+<p><img src="/images/invokeWithErrorHandling%E6%96%B9%E6%B3%95.png" alt="invokeWithErrorHandling方法"></p>
+<blockquote>
+<p>总结：用$emit方法触发事件允许一个事件有多个回调函数，它们会变成数组被遍历，同时也允许携带参数，它使用了apply()或call()更改作用域来保证参数有效</p>
+</blockquote>
+<p><strong>(注意：看源代码可以发现如果回调函数中有返回(return)，invokeWithErrorHandling()方法是能拿到并会返回res，但是$emit中没有对这个返回的res进行赋值。)</strong></p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>别看了，这里我实在不知道写什么好了</p>
 
       
       <!-- reward -->
@@ -185,7 +194,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/04/15/About%20Me/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/05/11/%E9%80%9A%E8%BF%87Vue%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90$on%E3%80%81$emit%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" alt="微信分享二维码">
     </div>
 </div>
 
