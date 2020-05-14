@@ -104,15 +104,17 @@
 <h3 id="Vue-的深入理解"><a href="#Vue-的深入理解" class="headerlink" title="Vue 的深入理解"></a>Vue 的深入理解</h3><h4 id="Vue的组件间传值"><a href="#Vue的组件间传值" class="headerlink" title="Vue的组件间传值"></a>Vue的组件间传值</h4><p>需要用到<code>props</code>、<code>v-bind</code>、<code>$emit</code>等方法的配合。</p>
 <h5 id="Vue的生命周期函数"><a href="#Vue的生命周期函数" class="headerlink" title="Vue的生命周期函数"></a>Vue的生命周期函数</h5><p>Vue在实例生成之前和生成之后总共有8个生命周期函数，他们分别是：</p>
 <ul>
-<li><code>BeforeCreate</code>：在实例生成之前</li>
-<li><code>Created</code>：实例生成之后</li>
-<li><code>BeforeMount</code>：实例渲染之前</li>
-<li><code>Mounted</code>：实例渲染之后</li>
-<li><code>BeforeUpdata</code>：实例数据修改之前</li>
-<li><code>Updatad</code>：实例数据修改之后</li>
-<li><code>BeforeDestroy</code>：实例销毁之前</li>
-<li><code>Destroyed</code>：实例销毁之后</li>
+<li><code>beforeCreate</code>：在实例生成之前</li>
+<li><code>created</code>：实例生成之后</li>
+<li><code>beforeMount</code>：实例渲染之前</li>
+<li><code>mounted</code>：实例渲染之后</li>
+<li><code>beforeUpdata</code>：实例数据修改之前</li>
+<li><code>updatad</code>：实例数据修改之后</li>
+<li><code>beforeDestroy</code>：实例销毁之前</li>
+<li><code>destroyed</code>：实例销毁之后</li>
 </ul>
+<a id="more"></a>
+
 <h4 id="Vue的模板语法"><a href="#Vue的模板语法" class="headerlink" title="Vue的模板语法"></a>Vue的模板语法</h4><p>Vue中的模板语法有插值表达式、<code>v-text</code>、<code>v-html</code>等等。</p>
 <p>任何v-开头的Vue指令，后面接的都是JS的表达式，也就是说可以在后面接上加减乘除等JS语句，插值表达式也是如此。</p>
 <h4 id="计算属性，方法和侦听器"><a href="#计算属性，方法和侦听器" class="headerlink" title="计算属性，方法和侦听器"></a>计算属性，方法和侦听器</h4><h5 id="计算属性-computed："><a href="#计算属性-computed：" class="headerlink" title="计算属性 computed："></a>计算属性 <code>computed</code>：</h5><p>直接通过属性名就能使用，因为原因和上面说的一样：</p>
@@ -120,7 +122,6 @@
 <p>任何v-开头的Vue指令，后面接的都是JS的表达式。也就是说可以在后面接上加减乘除等JS语句。</p>
 </blockquote>
 <p>缓存功能在计算的成员值不变的情况下将不会进行第二次计算，节省资源。</p>
-<a id="more"></a>
 <h5 id="方法methods："><a href="#方法methods：" class="headerlink" title="方法methods："></a>方法methods：</h5><p>也可以直接通过属性名使用（注意方法独有的括号），但是它没有计算属性的缓存功能，在计算成员值不变的情况下每次都会重新计算一次，在网页元素比较多的情况下可能会有比较明显的资源浪费。</p>
 <h5 id="监听器watch："><a href="#监听器watch：" class="headerlink" title="监听器watch："></a>监听器watch：</h5><p>可以监听指定的方法，当监听的方法发生变化时会执行指定的操作，保留了计算属性的缓存功能。</p>
 <p>当以上三种方法同是适用的候，优先推荐计算属性 <code>computed</code>，既简洁，也保留了性能。</p>
