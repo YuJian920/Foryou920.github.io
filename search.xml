@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>纯JS实现下拉加载</title>
+    <url>/2020/04/14/%E7%BA%AFJS%E5%AE%9E%E7%8E%B0%E4%B8%8B%E6%8B%89%E5%8A%A0%E8%BD%BD/</url>
+    <content><![CDATA[<p><img src="/images/LoadingImg.jpg" alt=""></p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><blockquote>
+<p>最近在深入学习Vue框架，想试着模仿<a href="https://www.app-echo.com/" target="_blank" rel="noopener" title="echo回声">echo回声</a>的移动端网页写一个网页出来，参考了uncleLian大佬的<a href="https://github.com/uncleLian/vue2-echo" target="_blank" rel="noopener" title="uncleLian/vue2-echo">vue2-echo</a>的一些实现。在这之中遇到了一个问题：uncleLian大佬使用Mint UI组件库来实现页面的下拉加载更多功能，但是我的项目并没有使用Mint UI，所以自然这个功能我就没法直接使用，没有就没有吧，大不了自己动手写，于是就有了这么一篇文章。</p>
+</blockquote>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>实现的思路很简单，就是判断 滚动高度 + 可视高度 是否大于文档高度</p>
+<p>window.pageYOffset + window.innerHeight &gt;= document.documentElement.scrollHeight</p>
+<p>如果判断结果为真，就向后端请求更多数据，再使用push方法添加新请求返回的数据</p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><p>实现每次下拉都返回不同的数据，就要对内容进行分页，根据页数返回不同的数据，但是这个项目并没有后端，后端返回的数据用的是Mock.js模拟的，问题来了Mock.mock在拦截GET请求的时候是无法拦截到url后面带的参数，这样一来就没法在Mock.js对传入的参数进行判断,这时候有两种解决思路，一种是数据分6页就写6个Mock.mock分别拦截不同的页数，使用这种方法的代码会很冗余，还有一种是uncleLian大佬的实现方法：使用for循环让Mock.mock拦截不同的页数</p>
+<a id="more"></a>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> Page = <span class="number">1</span>; Page &lt;= <span class="number">6</span>; Page++) &#123;</span><br><span class="line">  <span class="keyword">let</span> params = &#123;</span><br><span class="line">    <span class="string">'data'</span>: []</span><br><span class="line">  &#125;</span><br><span class="line">  Mock.mock(<span class="string">`<span class="subst">$&#123;baseURL&#125;</span>/list?Page=<span class="subst">$&#123;Page&#125;</span>`</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> params</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这样一来就实现了Mock.js对GET请求参数的模拟，光是这样还不行，需要对mock模拟的数据进行拆分，根据页数的不同返回的内容也不同，这里用到了JS的slice方法对数据拆成了6份</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> Page = <span class="number">1</span>; Page &lt;= <span class="number">6</span>; Page++) &#123;</span><br><span class="line">  <span class="keyword">let</span> params = &#123;</span><br><span class="line">    <span class="string">'data'</span>: []</span><br><span class="line">  &#125;</span><br><span class="line">  Mock.mock(<span class="string">`<span class="subst">$&#123;baseURL&#125;</span>/list?Page=<span class="subst">$&#123;Page&#125;</span>`</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    params.data = listJson.slice((Page - <span class="number">1</span>) * <span class="number">6</span>, Page * <span class="number">6</span>)</span><br><span class="line">    <span class="keyword">return</span> params</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>获取到了返回的分页数据，下一步就是要把数据给渲染出来，这里直接使用<code>push(params)</code>添加数据是不行的，因为params是一个数组，这里需要用到JS的展开运算(<code>...</code>)</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.MusicListJson.push(...params);</span><br></pre></td></tr></table></figure>
+
+<p>这样就完成了请求数据的添加操作</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>解决了实际代码编写时可能遇到的一些难点，剩下的就是添加页数控制，事件触发之类的操作，这样无插件实现JS下拉加载的功能就完成了。</p>
+<p><del>果然使用插件会更方便一些</del></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>通过Vue源代码解析$on、$emit实现原理</title>
+    <url>/2020/05/11/%E9%80%9A%E8%BF%87Vue%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90$on%E3%80%81$emit%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p><img src="/images/Vue_on&emit.png" alt="More OOXX With Vue"></p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><strong>阅读Vue的源码对深入学习Vue框架是非常有必要的，只知道它表面的用法，而不知道它内部的原理那就说不上是真正熟悉掌握了这一门框架，常常出了问题一头雾水</strong></p>
+<p><strong>Vue的$emit、$on和Node.js的EventEmitter的使用方法非常类似。</strong></p>
+<h2 id="正式开始"><a href="#正式开始" class="headerlink" title="正式开始"></a>正式开始</h2><h4 id="on绑定事件"><a href="#on绑定事件" class="headerlink" title="$on绑定事件"></a>$on绑定事件</h4><blockquote>
+<p>Vue中的$on是一种将函数与事件绑定的方法。</p>
+</blockquote>
+<p>通过Vue的源代码可以看到，$on调用时需要两个参数，第一个是字符串或数组类型作为事件的名称，第二个是触发事件执行的回调函数。$on第一步会对第一个参数做一个是否为数组的判断，这里可以看出$on允许为多个事件绑定同一个回调函数。</p>
+<a id="more"></a>
+
+<p>如果参数为数组，那么它会使用for遍历这个数组，并进行递归。<br>如果参数为字符串，那么它会在已有的事件(_events)中寻找是否已经存在相同的事件，如果没有会创建并初始化为空数组同时将传递的第二个参数也就是事件被触发时需要执行的回调函数添加进去。</p>
+<p><img src="/images/$on%E6%96%B9%E6%B3%95.png" alt="$on方法"></p>
+<blockquote>
+<p>总结：$on方法允许为多个事件绑定同一个回调函数，还在里面使用了递归<del>自己日自己</del></p>
+</blockquote>
+<h4 id="emit-触发事件"><a href="#emit-触发事件" class="headerlink" title="$emit 触发事件"></a>$emit 触发事件</h4><blockquote>
+<p>Vue中的$emit是一种触发事件的方法。</p>
+</blockquote>
+<p>它接受的第一个参数是一个字符串类型，这个字符串参数也就是需要触发的事件名称，第二个参数是触发事件时需要传递的数据。</p>
+<p>第一步$emit会将传递的事件名称转换成小写，并进行一系列的检查判断是否符合语法标准，然后它会在事件列表(_events)中寻找事件对应的回调函数，也就是在$on中传递并添加的回调函数，这里如果没有找到会直接返回，找到了会先进行一次判断，判断回调函数是否大于1，如果大于就把它转换成一个数组。</p>
+<p>这时候第一个参数事件名已经不再需要了，$emit会将其舍弃，并把剩下的数据转换成数组。传递给一个带有try&amp;catch的invokeWithErrorHandling()方法，并在其中使用apply()或call()来调用事件回调函数。</p>
+<p><img src="/images/%E8%B0%83%E7%94%A8invokeWithErrorHandling%E6%96%B9%E6%B3%95.png" alt="调用invokeWithErrorHandling方法"></p>
+<p><strong>invokeWithErrorHandling()方法源代码</strong></p>
+<p><img src="/images/invokeWithErrorHandling%E6%96%B9%E6%B3%95.png" alt="invokeWithErrorHandling方法"></p>
+<blockquote>
+<p>总结：用$emit方法触发事件允许一个事件有多个回调函数，它们会变成数组被遍历，同时也允许携带参数，它使用了apply()或call()更改作用域来保证参数有效</p>
+</blockquote>
+<p><strong>(注意：看源代码可以发现如果回调函数中有返回(return)，invokeWithErrorHandling()方法是能拿到并会返回res，但是$emit中没有对这个返回的res进行赋值。)</strong></p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>别看了，这里我实在不知道写什么好了</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Yan Ruyu_Vue学习笔记</title>
     <url>/2020/03/08/Yan%20Ruyu_Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p><img src="/images/welcome-to-vue.png" alt=""></p>
@@ -83,39 +142,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>通过Vue源代码解析$on、$emit实现原理</title>
-    <url>/2020/05/11/%E9%80%9A%E8%BF%87Vue%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90$on%E3%80%81$emit%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<p><img src="/images/Vue_on&emit.png" alt="More OOXX With Vue"></p>
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><strong>阅读Vue的源码对深入学习Vue框架是非常有必要的，只知道它表面的用法，而不知道它内部的原理那就说不上是真正熟悉掌握了这一门框架，常常出了问题一头雾水</strong></p>
-<p><strong>Vue的$emit、$on和Node.js的EventEmitter的使用方法非常类似。</strong></p>
-<h2 id="正式开始"><a href="#正式开始" class="headerlink" title="正式开始"></a>正式开始</h2><h4 id="on绑定事件"><a href="#on绑定事件" class="headerlink" title="$on绑定事件"></a>$on绑定事件</h4><blockquote>
-<p>Vue中的$on是一种将函数与事件绑定的方法。</p>
-</blockquote>
-<p>通过Vue的源代码可以看到，$on调用时需要两个参数，第一个是字符串或数组类型作为事件的名称，第二个是触发事件执行的回调函数。$on第一步会对第一个参数做一个是否为数组的判断，这里可以看出$on允许为多个事件绑定同一个回调函数。</p>
-<a id="more"></a>
-
-<p>如果参数为数组，那么它会使用for遍历这个数组，并进行递归。<br>如果参数为字符串，那么它会在已有的事件(_events)中寻找是否已经存在相同的事件，如果没有会创建并初始化为空数组同时将传递的第二个参数也就是事件被触发时需要执行的回调函数添加进去。</p>
-<p><img src="/images/$on%E6%96%B9%E6%B3%95.png" alt="$on方法"></p>
-<blockquote>
-<p>总结：$on方法允许为多个事件绑定同一个回调函数，还在里面使用了递归<del>自己日自己</del></p>
-</blockquote>
-<h4 id="emit-触发事件"><a href="#emit-触发事件" class="headerlink" title="$emit 触发事件"></a>$emit 触发事件</h4><blockquote>
-<p>Vue中的$emit是一种触发事件的方法。</p>
-</blockquote>
-<p>它接受的第一个参数是一个字符串类型，这个字符串参数也就是需要触发的事件名称，第二个参数是触发事件时需要传递的数据。</p>
-<p>第一步$emit会将传递的事件名称转换成小写，并进行一系列的检查判断是否符合语法标准，然后它会在事件列表(_events)中寻找事件对应的回调函数，也就是在$on中传递并添加的回调函数，这里如果没有找到会直接返回，找到了会先进行一次判断，判断回调函数是否大于1，如果大于就把它转换成一个数组。</p>
-<p>这时候第一个参数事件名已经不再需要了，$emit会将其舍弃，并把剩下的数据转换成数组。传递给一个带有try&amp;catch的invokeWithErrorHandling()方法，并在其中使用apply()或call()来调用事件回调函数。</p>
-<p><img src="/images/%E8%B0%83%E7%94%A8invokeWithErrorHandling%E6%96%B9%E6%B3%95.png" alt="调用invokeWithErrorHandling方法"></p>
-<p><strong>invokeWithErrorHandling()方法源代码</strong></p>
-<p><img src="/images/invokeWithErrorHandling%E6%96%B9%E6%B3%95.png" alt="invokeWithErrorHandling方法"></p>
-<blockquote>
-<p>总结：用$emit方法触发事件允许一个事件有多个回调函数，它们会变成数组被遍历，同时也允许携带参数，它使用了apply()或call()更改作用域来保证参数有效</p>
-</blockquote>
-<p><strong>(注意：看源代码可以发现如果回调函数中有返回(return)，invokeWithErrorHandling()方法是能拿到并会返回res，但是$emit中没有对这个返回的res进行赋值。)</strong></p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>别看了，这里我实在不知道写什么好了</p>
-]]></content>
-  </entry>
-  <entry>
     <title>零基础教你用WordPress搭建个人网站</title>
     <url>/2020/03/08/%E9%9B%B6%E5%9F%BA%E7%A1%80%E6%95%99%E4%BD%A0%E7%94%A8WordPress%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/</url>
     <content><![CDATA[<p><img src="/images/welcome-to-wp.png" alt=""></p>
@@ -172,32 +198,6 @@
 <h3 id="接下来就是花费时间把自己的网站建设的美观一点啦ヾ-。￣□￣-ツ"><a href="#接下来就是花费时间把自己的网站建设的美观一点啦ヾ-。￣□￣-ツ" class="headerlink" title="接下来就是花费时间把自己的网站建设的美观一点啦ヾ(。￣□￣)ツ"></a>接下来就是花费时间把自己的网站建设的美观一点啦ヾ(。￣□￣)ツ</h3><h3 id="一些WordPress主题推荐"><a href="#一些WordPress主题推荐" class="headerlink" title="一些WordPress主题推荐"></a>一些WordPress主题推荐</h3><p>我用的MD主题MDx：<a href="https://flyhigher.top/develop/788.html" target="_blank" rel="noopener">传送门</a></p>
 <h6 id="最后，感谢Axton"><a href="#最后，感谢Axton" class="headerlink" title="最后，感谢Axton"></a>最后，感谢Axton</h6><h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3><p>*以上内容大部分来自互联网ㄟ(▔ ,▔)ㄏ<br>*不来自的那就是我乱说的ㄟ(▔ ,▔)ㄏ</p>
 <p>青梅枯萎，竹马老去，从此我爱的人都像你<br>晚安</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>纯JS实现下拉加载</title>
-    <url>/2020/04/14/%E7%BA%AFJS%E5%AE%9E%E7%8E%B0%E4%B8%8B%E6%8B%89%E5%8A%A0%E8%BD%BD/</url>
-    <content><![CDATA[<p><img src="/images/LoadingImg.jpg" alt=""></p>
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><blockquote>
-<p>最近在深入学习Vue框架，想试着模仿<a href="https://www.app-echo.com/" target="_blank" rel="noopener" title="echo回声">echo回声</a>的移动端网页写一个网页出来，参考了uncleLian大佬的<a href="https://github.com/uncleLian/vue2-echo" target="_blank" rel="noopener" title="uncleLian/vue2-echo">vue2-echo</a>的一些实现。在这之中遇到了一个问题：uncleLian大佬使用Mint UI组件库来实现页面的下拉加载更多功能，但是我的项目并没有使用Mint UI，所以自然这个功能我就没法直接使用，没有就没有吧，大不了自己动手写，于是就有了这么一篇文章。</p>
-</blockquote>
-<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>实现的思路很简单，就是判断 滚动高度 + 可视高度 是否大于文档高度</p>
-<p>window.pageYOffset + window.innerHeight &gt;= document.documentElement.scrollHeight</p>
-<p>如果判断结果为真，就向后端请求更多数据，再使用push方法添加新请求返回的数据</p>
-<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><p>实现每次下拉都返回不同的数据，就要对内容进行分页，根据页数返回不同的数据，但是这个项目并没有后端，后端返回的数据用的是Mock.js模拟的，问题来了Mock.mock在拦截GET请求的时候是无法拦截到url后面带的参数，这样一来就没法在Mock.js对传入的参数进行判断,这时候有两种解决思路，一种是数据分6页就写6个Mock.mock分别拦截不同的页数，使用这种方法的代码会很冗余，还有一种是uncleLian大佬的实现方法：使用for循环让Mock.mock拦截不同的页数</p>
-<a id="more"></a>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> Page = <span class="number">1</span>; Page &lt;= <span class="number">6</span>; Page++) &#123;</span><br><span class="line">  <span class="keyword">let</span> params = &#123;</span><br><span class="line">    <span class="string">'data'</span>: []</span><br><span class="line">  &#125;</span><br><span class="line">  Mock.mock(<span class="string">`<span class="subst">$&#123;baseURL&#125;</span>/list?Page=<span class="subst">$&#123;Page&#125;</span>`</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> params</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这样一来就实现了Mock.js对GET请求参数的模拟，光是这样还不行，需要对mock模拟的数据进行拆分，根据页数的不同返回的内容也不同，这里用到了JS的slice方法对数据拆成了6份</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> Page = <span class="number">1</span>; Page &lt;= <span class="number">6</span>; Page++) &#123;</span><br><span class="line">  <span class="keyword">let</span> params = &#123;</span><br><span class="line">    <span class="string">'data'</span>: []</span><br><span class="line">  &#125;</span><br><span class="line">  Mock.mock(<span class="string">`<span class="subst">$&#123;baseURL&#125;</span>/list?Page=<span class="subst">$&#123;Page&#125;</span>`</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    params.data = listJson.slice((Page - <span class="number">1</span>) * <span class="number">6</span>, Page * <span class="number">6</span>)</span><br><span class="line">    <span class="keyword">return</span> params</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>获取到了返回的分页数据，下一步就是要把数据给渲染出来，这里直接使用<code>push(params)</code>添加数据是不行的，因为params是一个数组，这里需要用到JS的展开运算(<code>...</code>)</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.MusicListJson.push(...params);</span><br></pre></td></tr></table></figure>
-
-<p>这样就完成了请求数据的添加操作</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>解决了实际代码编写时可能遇到的一些难点，剩下的就是添加页数控制，事件触发之类的操作，这样无插件实现JS下拉加载的功能就完成了。</p>
-<p><del>果然使用插件会更方便一些</del></p>
 ]]></content>
   </entry>
 </search>
